@@ -1,5 +1,6 @@
 package com.example.transfer.api.controllers;
 
+import com.example.transfer.api.controllers.doc.TransferControllerSwagger;
 import com.example.transfer.api.dtos.TransferDto;
 import com.example.transfer.api.services.TransferService;
 import jakarta.validation.Valid;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/transfer")
 @RequiredArgsConstructor
-public class TransferController {
+public class TransferController implements TransferControllerSwagger {
 
     private final TransferService transferService;
 
