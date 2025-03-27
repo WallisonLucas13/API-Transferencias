@@ -1,7 +1,7 @@
 package com.example.transfer.api.services.transfer.utils;
 
-import com.example.transfer.api.models.Person;
 import com.example.transfer.api.models.Transfer;
+import com.example.transfer.api.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ public class TransferNotifyService {
         this.restClient = RestClient.create(notifyUrl);
     }
 
-    public void notifyPayee(Person person, Transfer transfer) {
+    public void notifyPayee(User user, Transfer transfer) {
         try {
             restClient
                     .post()

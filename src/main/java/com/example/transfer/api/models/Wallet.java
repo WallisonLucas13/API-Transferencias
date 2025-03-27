@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
 @Data
+@Table
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +25,5 @@ public class Wallet {
 
     @OneToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private Person owner;
+    private User owner;
 }

@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NotFoundPersonException.class)
-    public ResponseEntity<String> handleNotFoundPersonException(Exception e) {
+    @ExceptionHandler(NotFoundUserException.class)
+    public ResponseEntity<String> handleNotFoundUserException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(PersonNotAllowedToMakeTransfersException.class)
-    public ResponseEntity<String> handlePersonNotAllowedToMakeTransfersException(Exception e) {
+    @ExceptionHandler(UserNotAllowedToMakeTransfersException.class)
+    public ResponseEntity<String> handleUserNotAllowedToMakeTransfersException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler({InsufficientBalanceException.class, InvalidPersonIdException.class})
+    @ExceptionHandler({InsufficientBalanceException.class, InvalidUserIdException.class})
     public ResponseEntity<String> handleInsufficientBalanceException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }

@@ -1,6 +1,6 @@
 package com.example.transfer.api.models;
 
-import com.example.transfer.api.enums.PersonType;
+import com.example.transfer.api.enums.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -11,12 +11,13 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
 
-@Entity
 @Data
+@Table
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class User {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class Person {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PersonType type;
+    private UserType type;
 
     @Column(nullable = false)
     private String fullName;
