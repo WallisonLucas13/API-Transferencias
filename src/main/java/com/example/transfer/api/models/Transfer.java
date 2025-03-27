@@ -8,9 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
-@Entity
 @Data
+@Table
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,13 +27,21 @@ public class Transfer {
 
     @ManyToOne
     @JoinColumn(name = "payer_id", referencedColumnName = "id")
-    private Person payer;
+    private User payer;
 
     @ManyToOne
     @JoinColumn(name = "payee_id", referencedColumnName = "id")
-    private Person payee;
+    private User payee;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TransferStatus status;
+
+    @Column(nullable = false)
+    private OffsetDateTime createdAt;
+
+    @PrePersist
+    void prePersist() {
+        createdAt = OffsetDateTime.now();
+    }
 }
