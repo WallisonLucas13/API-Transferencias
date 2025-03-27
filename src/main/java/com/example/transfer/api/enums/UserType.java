@@ -1,6 +1,6 @@
 package com.example.transfer.api.enums;
 
-public enum PersonType {
-    USER,
+public enum UserType {
+    COMMON,
     SHOPKEEPER
 }
