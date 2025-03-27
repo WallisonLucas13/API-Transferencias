@@ -1,4 +1,4 @@
-package com.example.transfer.api.services.transfer.utils;
+package com.example.transfer.api.services.transfer;
 
 import com.example.transfer.api.dtos.TransferDto;
 import com.example.transfer.api.enums.UserType;

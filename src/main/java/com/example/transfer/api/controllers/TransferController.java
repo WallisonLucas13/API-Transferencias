@@ -2,7 +2,7 @@ package com.example.transfer.api.controllers;
 
 import com.example.transfer.api.controllers.doc.TransferControllerSwagger;
 import com.example.transfer.api.dtos.TransferDto;
-import com.example.transfer.api.services.TransferService;
+import com.example.transfer.api.services.transfer.TransferService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

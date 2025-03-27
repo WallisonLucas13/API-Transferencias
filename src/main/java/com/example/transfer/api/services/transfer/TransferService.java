@@ -1,12 +1,13 @@
-package com.example.transfer.api.services;
+package com.example.transfer.api.services.transfer;
 
 import com.example.transfer.api.dtos.TransferDto;
 import com.example.transfer.api.enums.TransferStatus;
 import com.example.transfer.api.models.Transfer;
 import com.example.transfer.api.models.User;
 import com.example.transfer.api.repositories.TransferRepository;
-import com.example.transfer.api.services.transfer.utils.TransferNotifyService;
-import com.example.transfer.api.services.transfer.utils.TransferValidationService;
+import com.example.transfer.api.services.UserService;
+import com.example.transfer.api.services.transfer.TransferNotifyService;
+import com.example.transfer.api.services.transfer.TransferValidationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

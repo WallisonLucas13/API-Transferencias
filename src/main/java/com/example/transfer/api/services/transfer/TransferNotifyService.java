@@ -1,4 +1,4 @@
-package com.example.transfer.api.services.transfer.utils;
+package com.example.transfer.api.services.transfer;
 
 import com.example.transfer.api.models.Transfer;
 import com.example.transfer.api.models.User;
