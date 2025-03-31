@@ -1,6 +1,7 @@
 package com.example.transfer.api.exceptions.handler;
 
 import com.example.transfer.api.exceptions.*;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Log4j2
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -57,6 +59,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
+        log.info("Erro inesperado", e);
         final String message = "Ocorreu um erro inesperado";
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
