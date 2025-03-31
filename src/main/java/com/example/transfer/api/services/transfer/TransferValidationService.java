@@ -1,5 +1,6 @@
 package com.example.transfer.api.services.transfer;
 
+import com.example.transfer.api.clients.TransferExternalAuthorizationClient;
 import com.example.transfer.api.dtos.TransferDto;
 import com.example.transfer.api.enums.UserType;
 import com.example.transfer.api.exceptions.InsufficientBalanceException;
@@ -7,21 +8,17 @@ import com.example.transfer.api.exceptions.InvalidUserIdException;
 import com.example.transfer.api.exceptions.UnauthorizedTransferException;
 import com.example.transfer.api.exceptions.UserNotAllowedToMakeTransfersException;
 import com.example.transfer.api.models.User;
+import feign.FeignException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClient;
 
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class TransferValidationService {
 
-    private final RestClient restClient;
-
-    public TransferValidationService(@Value("${external.validation.api.url}") String validationUrl) {
-        this.restClient = RestClient.create(validationUrl);
-    }
+    private final TransferExternalAuthorizationClient transferExternalAuthorizationClient;
 
     public void validateTransferUsersId(TransferDto transferDto) {
         if(transferDto.payerId().compareTo(transferDto.payeeId()) == 0) {
@@ -43,13 +40,11 @@ public class TransferValidationService {
 
     public void validateTransferExternalAuthorization(User user, TransferDto transferDto) {
         try {
-            restClient
-                    .get()
-                    .retrieve()
-                    .toBodilessEntity();
-
-        } catch(HttpClientErrorException e){
-            log.info("Autorização externa falhou, status -> {}", e.getStatusCode());
+           if(!transferExternalAuthorizationClient.authorizeTransfer().data().authorization()){
+               throw new UnauthorizedTransferException("Transferência não autorizada");
+           }
+        } catch(FeignException e){
+            log.info("Autorização externa falhou");
             throw new UnauthorizedTransferException("Transferência não autorizada");
         }
     }
